@@ -1,0 +1,12 @@
+<h2><%= @user.email %></h2>
+<i><%= @user.created_at %></i>
+
+<ul>
+  <% @user.articles.each do |article| %>
+    <li><%= link_to article.title, article %></li>
+  <% end %>
+</ul>
+
+<p>
+  <%= link_to "Back", root_path %>
+</p>

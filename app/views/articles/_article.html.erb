@@ -1,0 +1,16 @@
+<%= turbo_frame_tag article do %>
+  <h2><%= link_to article.title, article_path(article), data: { turbo_frame: "_top" } %></h2>
+  <p><%= article.body %></p>
+  <cite><%= article.user.name %></cite>
+
+  <% if owner?(article) %>
+    <p>
+      <%= link_to "Edit", edit_article_path(article)%>
+      /
+      <%= link_to "Destroy", article_path(article), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %>
+    </p>
+  <% end %>
+<% end %>

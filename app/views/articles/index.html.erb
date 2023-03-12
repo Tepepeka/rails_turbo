@@ -1,0 +1,24 @@
+<% if user_signed_in? %>
+  #Hi, <%=link_to current_user.email, user_path(current_user.id) %>!
+  /
+  <%= link_to "sign out", destroy_user_session_path, data: {
+    turbo_method: :delete,
+    turbo_confirm: "Are you sure?"
+  } %>
+<% else %>
+  <%= link_to "Sign in", new_user_session_path %>
+  /
+  <%= link_to "Sign up", new_user_registration_path %>
+<% end %>
+
+<%= turbo_stream_from "quotes" %>
+
+<p>
+  <%= link_to "New article", new_article_path, data: { turbo_frame: dom_id(Article.new) }%>
+</p>
+
+<%= turbo_frame_tag Article.new %>
+
+<%= turbo_frame_tag "articles" do %>
+  <%= render @articles %>
+<% end %>
